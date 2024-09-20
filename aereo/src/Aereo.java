@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Aereo {
     private String numeroAereo;
     private int maxPosti;
@@ -7,7 +5,8 @@ public class Aereo {
     private String luogoPartenza;
     private String luogoDestinazione;
     private double costoBase;
-    private ArrayList<Passeggero> passeggeri;
+    private Passeggero[] passeggeri;
+    private int numPasseggeri;  // Contatore per tenere traccia del numero di passeggeri
 
     // Costruttore
     public Aereo(String numeroAereo, int maxPosti, String compagniaAerea, String luogoPartenza, String luogoDestinazione, double costoBase) {
@@ -17,13 +16,15 @@ public class Aereo {
         this.luogoPartenza = luogoPartenza;
         this.luogoDestinazione = luogoDestinazione;
         this.costoBase = costoBase;
-        this.passeggeri = new ArrayList<>();
+        this.passeggeri = new Passeggero[maxPosti];
+        this.numPasseggeri = 0;  // All'inizio non ci sono passeggeri
     }
 
     // Metodo per aggiungere un passeggero
     public void aggiungiPasseggero(Passeggero passeggero) {
-        if (passeggeri.size() < maxPosti) {
-            passeggeri.add(passeggero);
+        if (numPasseggeri < maxPosti) {
+            passeggeri[numPasseggeri] = passeggero;
+            numPasseggeri++;
         } else {
             System.out.println("Aereo al completo, non è possibile aggiungere altri passeggeri.");
         }
@@ -31,7 +32,19 @@ public class Aereo {
 
     // Metodo per rimuovere un passeggero specifico
     public void rimuoviPasseggero(String nome, String cognome) {
-        passeggeri.removeIf(p -> p.getNome().equalsIgnoreCase(nome) && p.getCognome().equalsIgnoreCase(cognome));
+        for (int i = 0; i < numPasseggeri; i++) {
+            if (passeggeri[i].getNome().equalsIgnoreCase(nome) && passeggeri[i].getCognome().equalsIgnoreCase(cognome)) {
+                // Shift dei passeggeri per riempire il "buco"
+                for (int j = i; j < numPasseggeri - 1; j++) {
+                    passeggeri[j] = passeggeri[j + 1];
+                }
+                passeggeri[numPasseggeri - 1] = null; // Elimina l'ultimo elemento
+                numPasseggeri--; // Diminuisce il numero dei passeggeri
+                System.out.println("Passeggero rimosso.");
+                return;
+            }
+        }
+        System.out.println("Passeggero non trovato.");
     }
 
     // Metodo per visualizzare le informazioni dell'aereo e dei passeggeri
@@ -41,16 +54,16 @@ public class Aereo {
         System.out.println("Luogo di Partenza: " + luogoPartenza);
         System.out.println("Luogo di Destinazione: " + luogoDestinazione);
         System.out.println("Passeggeri:");
-        for (Passeggero p : passeggeri) {
-            p.visualizzaDettagli();
+        for (int i = 0; i < numPasseggeri; i++) {
+            passeggeri[i].visualizzaDettagli();
         }
     }
 
     // Metodo per calcolare il peso totale dei bagagli
     public double calcolaPesoTotaleBagagli() {
         double pesoTotale = 0;
-        for (Passeggero p : passeggeri) {
-            pesoTotale += p.getPesoBagaglioMano() + p.getPesoBagaglioStiva();
+        for (int i = 0; i < numPasseggeri; i++) {
+            pesoTotale += passeggeri[i].getPesoBagaglioMano() + passeggeri[i].getPesoBagaglioStiva();
         }
         return pesoTotale;
     }
@@ -58,9 +71,9 @@ public class Aereo {
     // Metodo per visualizzare il passeggero che ha pagato di più
     public void visualizzaPasseggeroCheHaPagatoDiPiu() {
         Passeggero piuCostoso = null;
-        for (Passeggero p : passeggeri) {
-            if (piuCostoso == null || p.getCostoTotaleBiglietto() > piuCostoso.getCostoTotaleBiglietto()) {
-                piuCostoso = p;
+        for (int i = 0; i < numPasseggeri; i++) {
+            if (piuCostoso == null || passeggeri[i].getCostoTotaleBiglietto() > piuCostoso.getCostoTotaleBiglietto()) {
+                piuCostoso = passeggeri[i];
             }
         }
         if (piuCostoso != null) {
@@ -110,11 +123,11 @@ public class Aereo {
         this.luogoDestinazione = luogoDestinazione;
     }
 
-    public ArrayList<Passeggero> getPasseggeri() {
+    public Passeggero[] getPasseggeri() {
         return passeggeri;
     }
 
-    public void setPasseggeri(ArrayList<Passeggero> passeggeri) {
+    public void setPasseggeri(Passeggero[] passeggeri) {
         this.passeggeri = passeggeri;
     }
 }
