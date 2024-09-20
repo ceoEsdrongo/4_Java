@@ -1,3 +1,26 @@
+/*Per ogni passeggero si deve memorizzare: cognome, nome, peso bagaglio a mano, peso
+bagaglio in stiva, costo del biglietto (costo base e costo bagagli).
+Il costo bagagli viene così calcolato: il bagaglio a mano costa 10 € se il peso è minore di 10 Kg,
+oltre i 10 Kg si paga 2€ per ogni Kg in più, il bagaglio in stiva costa 30 € se il peso è minore di 20
+Kg, altrimenti costa 5 € per ogni Kg in più.
+L’aereo memorizza il numero dell’aereo, il numeo max di posti, il nome della compagnia aerea, il
+luogo di partenza, il luogo di destinazione ed l’elenco dei passeggeri.
+Si chiede di
+1. creare la classe Passeggero con l’inserimento dall’input e la visualizzazione del cognome,
+nome e costo del biglietto
+2. creare l’aereo numero “FR799”, max 4 posti, compagnia “RYANAIR”, luogo di partenza
+“VENEZIA”, luogo di destinazione “LONDRA”, costo di base del viaggio 50€ ed inserire i dati
+relativi a tutti i passeggeri.
+3. visualizzare le informazioni dell’aereo e dei suoi passeggeri
+4. determinare il peso totale di tutti i bagagli
+5. all’ultimo momento il passeggero Mario Rossi (si ipotizzi che ne esista uno solo con questo nome e
+cognome) non può più partire, viene quindi sostituito da un altro passeggero: realizzare la
+sostituzione
+6. visualizzare le informazioni del passeggero (o passeggeri) che ha pagato più di tutti gli altri*/
+
+
+
+
 import java.util.Scanner;
 
 public class Main {
