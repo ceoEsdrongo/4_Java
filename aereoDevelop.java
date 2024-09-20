@@ -13,13 +13,14 @@ public class Main {
 
 ------------------------
   Passeggero.java
-  import java.util.Scanner;
+ import java.util.Scanner;
 
 public class Passeggero {
     private final int costoBase; //biglietto
     private String nome, cognome;
     private int pesoMano;
     private int pesoStiva;
+    final int costoBaseBagaglioMano=10,pesoBagaglioMano=10,costoMaggBagaglioMano=2,costoBaseBagaglioStiva=30,pesoBaseBagaglioStiva=20,costoMaggBagaglioStiva=5;
 
     //costruttore
     public Passeggero() {
@@ -78,7 +79,23 @@ public class Passeggero {
     public void visualizza(){
         System.out.println(this.toString());
     }
+    public int getCostoBiglietto(){
+        int c=costoBase;
+        
+        c+=costoBaseBagaglioMano;
+        if(pesoMano>=pesoBagaglioMano) {
+            c += (pesoMano - pesoBagaglioMano) * costoMaggBagaglioMano;
+        }
+        c+=costoBaseBagaglioStiva;
+        if(pesoStiva>pesoBaseBagaglioStiva){
+            c+=(pesoStiva-pesoBaseBagaglioStiva)*costoMaggBagaglioStiva;
+        }
+        return c;
+    }
 }
+
+
+
 
 
 
