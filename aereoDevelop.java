@@ -119,7 +119,29 @@ public class Passeggero {
 
 ---------------------
     Aereo.java
-    
+    public class Aereo {
+    Passeggero[] p;
+    p = new Passeggero[4];
+    String aereo= "FR799";
+    final int maxPosti=4;
+    String compagnia = "RYANAIR";
+
+    public Aereo(){
+        p = new Passeggero[4];
+        String aereo= "FR799";
+        final int maxPosti=4;
+        String compagnia = "RYANAIR";
+        
+    }
+    public Aereo(String aereo){
+        p = new Passeggero[4];
+        String aereo= "FR799";
+        final int maxPosti=4;
+        String compagnia = "RYANAIR";
+
+    }
+}
+
 
 
 
