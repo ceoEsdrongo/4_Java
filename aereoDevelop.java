@@ -26,9 +26,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
-        Passeggero p = new Passeggero();
-        p.inserisci();
-        p.visualizza();
+        
         
 
     }
@@ -142,124 +140,106 @@ sostituzione
 
 public class Aereo {
     private String numeroAereo;
-    private int maxPosti = 4;
+    private int maxPosti;
     private String compagniaAerea;
-    private String decollo, arrivo;
+    private String luogoPartenza;
+    private String luogoDestinazione;
     private double costoBase;
     private Passeggero[] passeggeri;
-    private int numPasseggeri;
+    private int numPasseggeri;  // Contatore per tenere traccia del numero di passeggeri
 
-    //costruttore
-    Aereo(String numeroAereo, int maxPosti, String compagniaAerea, String decollo, String arrivo, double costoBase, Passeggero[] passeggeri, int numPasseggeri) {
+    // Costanti per i costi dei bagagli
+    private static final double COSTO_BAGAGLIO_MANO_BASE = 10;
+    private static final double COSTO_EXTRA_PER_KG_BAGAGLIO_MANO = 2;
+    private static final double LIMITE_BAGAGLIO_MANO_KG = 10;
+    private static final double COSTO_BAGAGLIO_STIVA_BASE = 30;
+    private static final double COSTO_EXTRA_PER_KG_BAGAGLIO_STIVA = 5;
+    private static final double LIMITE_BAGAGLIO_STIVA_KG = 20;
+
+    // Costruttore
+    public Aereo(String numeroAereo, int maxPosti, String compagniaAerea, String luogoPartenza, String luogoDestinazione, double costoBase) {
         this.numeroAereo = numeroAereo;
         this.maxPosti = maxPosti;
         this.compagniaAerea = compagniaAerea;
-        this.decollo = decollo;
-        this.arrivo = arrivo;
+        this.luogoPartenza = luogoPartenza;
+        this.luogoDestinazione = luogoDestinazione;
         this.costoBase = costoBase;
         this.passeggeri = new Passeggero[maxPosti];
-        this.numPasseggeri = numPasseggeri = 0;
+        this.numPasseggeri = 0;  // All'inizio non ci sono passeggeri
     }
 
-    //metodo passeggeri
+    // Metodo per aggiungere un passeggero
     public void aggiungiPasseggero(Passeggero passeggero) {
         if (numPasseggeri < maxPosti) {
             passeggeri[numPasseggeri] = passeggero;
             numPasseggeri++;
         } else {
-            System.out.println("passeggeri pieni");
+            System.out.println("Aereo al completo, non è possibile aggiungere altri passeggeri.");
         }
     }
 
+    // Metodo per aggiungere più passeggeri contemporaneamente
+    public void aggiungiPasseggeri(Passeggero[] nuoviPasseggeri) {
+        for (Passeggero passeggero : nuoviPasseggeri) {
+            if (numPasseggeri < maxPosti) {
+                aggiungiPasseggero(passeggero);
+            } else {
+                System.out.println("Aereo al completo, non è possibile aggiungere altri passeggeri.");
+                break;
+            }
+        }
+    }
+
+    // Metodo per rimuovere un passeggero specifico
     public void rimuoviPasseggero(String nome, String cognome) {
         for (int i = 0; i < numPasseggeri; i++) {
             if (passeggeri[i].getNome().equalsIgnoreCase(nome) && passeggeri[i].getCognome().equalsIgnoreCase(cognome)) {
+                // Shift dei passeggeri per riempire il "buco"
                 for (int j = i; j < numPasseggeri - 1; j++) {
                     passeggeri[j] = passeggeri[j + 1];
                 }
-                // Nullifica l'ultimo elemento dopo il "shift"
-                passeggeri[numPasseggeri - 1] = null;
-                numPasseggeri--;
+                passeggeri[numPasseggeri - 1] = null; // Elimina l'ultimo elemento
+                numPasseggeri--; // Diminuisce il numero dei passeggeri
+                System.out.println("Passeggero rimosso.");
                 return;
             }
         }
-        System.out.println("Passeggero non trovato");
+        System.out.println("Passeggero non trovato.");
     }
 
+    // Metodo per visualizzare le informazioni dell'aereo e dei passeggeri
     public void visualizzaDettagli() {
-        System.out.println("Numero Aereo" + numeroAereo);
-        System.out.println("Compagnia Aerea" + compagniaAerea);
-        System.out.println("Decollo" + decollo);
-        System.out.println("Arrivo" + arrivo);
-        System.out.println("passeggeri:");
+        System.out.println("Numero Aereo: " + numeroAereo);
+        System.out.println("Compagnia Aerea: " + compagniaAerea);
+        System.out.println("Luogo di Partenza: " + luogoPartenza);
+        System.out.println("Luogo di Destinazione: " + luogoDestinazione);
+        System.out.println("Passeggeri:");
         for (int i = 0; i < numPasseggeri; i++) {
-            passeggeri[i].visualizza();
+            passeggeri[i].visualizzaDettagli();
         }
     }
-    
 
-    public String getNumeroAereo() {
-        return numeroAereo;
+    // Metodo per calcolare il peso totale dei bagagli
+    public double calcolaPesoTotaleBagagli() {
+        double pesoTotale = 0;
+        for (int i = 0; i < numPasseggeri; i++) {
+            pesoTotale += passeggeri[i].getPesoBagaglioMano() + passeggeri[i].getPesoBagaglioStiva();
+        }
+        return pesoTotale;
     }
 
-    public void setNumeroAereo(String numeroAereo) {
-        this.numeroAereo = numeroAereo;
-    }
-
-    public String getCompagniaAerea() {
-        return compagniaAerea;
-    }
-
-    public void setCompagniaAerea(String compagniaAerea) {
-        this.compagniaAerea = compagniaAerea;
-    }
-
-    public int getMaxPosti() {
-        return maxPosti;
-    }
-
-    public void setMaxPosti(int maxPosti) {
-        this.maxPosti = maxPosti;
-    }
-
-    public String getDecollo() {
-        return decollo;
-    }
-
-    public void setDecollo(String decollo) {
-        this.decollo = decollo;
-    }
-
-    public String getArrivo() {
-        return arrivo;
-    }
-
-    public void setArrivo(String arrivo) {
-        this.arrivo = arrivo;
-    }
-
-    public double getCostoBase() {
-        return costoBase;
-    }
-
-    public void setCostoBase(double costoBase) {
-        this.costoBase = costoBase;
-    }
-
-    public int getNumPasseggeri() {
-        return numPasseggeri;
-    }
-
-    public void setNumPasseggeri(int numPasseggeri) {
-        this.numPasseggeri = numPasseggeri;
-    }
-
-    public Passeggero[] getPasseggeri() {
-        return passeggeri;
-    }
-
-    public void setPasseggeri(Passeggero[] passeggeri) {
-        this.passeggeri = passeggeri;
+    // Metodo per visualizzare il passeggero che ha pagato di più
+    public void visualizzaPasseggeroCheHaPagatoDiPiu() {
+        Passeggero piuCostoso = null;
+        for (int i = 0; i < numPasseggeri; i++) {
+            if (piuCostoso == null || passeggeri[i].getCostoTotaleBiglietto() > piuCostoso.getCostoTotaleBiglietto()) {
+                piuCostoso = passeggeri[i];
+            }
+        }
+        if (piuCostoso != null) {
+            System.out.println("Il passeggero che ha pagato di più è:");
+            piuCostoso.visualizzaDettagli();
+        }
     }
 }
 
