@@ -112,7 +112,7 @@ public class Libro {
 
 
 ---------------Scaffale //in fase di costruzione
-  /*Si vogliono memorizzare le informazioni dei libri della biblioteca dell'Euganeo riportando,
+ /*Si vogliono memorizzare le informazioni dei libri della biblioteca dell'Euganeo riportando,
 per ogni libro, il codice ISBN (codice univoco), il titolo, l’autore, l’argomento e il prezzo.
 Realizzare la classe Libro con quanto richiesto.
 Creare la classe Biblioteca con il nome della biblioteca e il numero max di libri presenti.
@@ -131,19 +131,43 @@ f. visualizzare il titolo dei libri che hanno il prezzo più alto
 4. aggiornare le informazioni di un libro dato il suo ISBN
 5. cancellare un libro dato il suo ISBN*/
 
+import java.util.Arrays;
+
 public class Scaffale {
     private String nomeScaffale;
-    private Libro[] libri ;
+    private Libro[] libri;
     private int contaLibri;
+    private int maxlibri;
+    private Libro book;
 
     //costruttore
-    public Scaffale(){
-        this.nomeScaffale="Esdrongo";
-        this.contaLibri=0;
+    public Scaffale() {
+        this.nomeScaffale = "Esdrongo";
+        this.contaLibri = 0;
+        this.maxlibri = 0;
     }
-    public Scaffale(String nomeScaffale,int contaLibri){
-        this.nomeScaffale=nomeScaffale;
-        this.contaLibri=0;
-        Libro[] libri=new Libro[contaLibri];
+
+    public Scaffale(String nomeScaffale, int contaLibri) {
+        this.nomeScaffale = nomeScaffale;
+        this.contaLibri = 0;
+        libri = new Libro[maxlibri];
+    }
+
+    public void inserisci() {
+        if (contaLibri < maxlibri) {
+            book = new Libro();
+            book.inserisci();
+            libri[contaLibri] = book;
+            contaLibri++;
+        } else {
+            System.out.println("scaffale pieno");
+        }
+    }
+    
+
+    @Override
+    public String toString() {
+        return "Scaffale{" + "nomeScaffale='" + nomeScaffale + '\'' + ", libri=" + Arrays.toString(libri) + ", contaLibri=" + contaLibri + ", maxlibri=" + maxlibri + ", book=" + book + '}';
     }
 }
+
