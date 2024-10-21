@@ -22,8 +22,8 @@ import java.util.Vector;
 public class Scaffale {
     private String nomeScaffale;
     private Vector<Libro> libri;
-    private int contaLibri;
-    private int maxLibri;
+    //private int contaLibri;
+   // private int maxLibri;
 
     // Costruttore
     public Scaffale(String nomeScaffale, int maxLibri) {
@@ -35,7 +35,7 @@ public class Scaffale {
 
     // Inserimento di un libro nello scaffale
     public void inserisciLibro(Libro libro) {
-        if (contaLibri < maxLibri) {
+        //if (contaLibri < maxLibri) {
             // Controllo per ISBN univoco
             for (int i = 0; i < contaLibri; i++) {
                 if (libri.get(i).getISBN().equals(libro.getISBN())) {
