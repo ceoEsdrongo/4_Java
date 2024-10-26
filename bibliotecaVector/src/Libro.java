@@ -1,3 +1,4 @@
+
 /*Si vogliono memorizzare le informazioni dei libri della biblioteca dell'Euganeo riportando,
 per ogni libro, il codice ISBN (codice univoco), il titolo, l’autore, l’argomento e il prezzo.
 Realizzare la classe Libro con quanto richiesto.
@@ -113,6 +114,3 @@ public class Libro {
         System.out.println(toString());
     }
 }
-/*in entrambe le classi devi mettere l'inserimento e il visualizza in scaffale richiama toString e metti un sout
-per svuotare il buffer sennò sta incallato li
- */

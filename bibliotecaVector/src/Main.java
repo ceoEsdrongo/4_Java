@@ -1,10 +1,9 @@
 import java.util.Scanner;
-import java.util.Vector;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Scaffale biblioteca = new Scaffale("Biblioteca dell'Euganeo", 100); 
+        Scaffale biblioteca = new Scaffale("Biblioteca dell'Euganeo", 100);
         int scelta;
 
         do {
@@ -20,39 +19,39 @@ public class Main {
             System.out.println("9 -> Aggiorna informazioni di un libro");
             System.out.println("10 -> Esci dal programma");
             scelta = sc.nextInt();
-            sc.nextLine(); // Consuma la newline residua
+            sc.nextLine();
 
             switch (scelta) {
-                case 1: // Aggiungi un nuovo libro
+                case 1:
                     Libro libro = new Libro();
-                    libro.inserisci(); // Richiama il metodo per inserire i dati del libro
+                    libro.inserisci();
                     biblioteca.inserisciLibro(libro);
                     break;
 
-                case 2: // Rimuovi un libro
+                case 2:
                     System.out.println("Inserisci l'ISBN del libro da rimuovere:");
                     String isbnDaTogliere = sc.nextLine();
                     biblioteca.cancellaLibro(isbnDaTogliere);
                     break;
 
-                case 3: // Visualizza tutta la biblioteca
+                case 3:
                     System.out.println("Elenco dei libri nello scaffale:");
                     biblioteca.visualizzaScaffale();
                     break;
 
-                case 4: // Visualizza libro per ISBN
+                case 4:
                     System.out.println("Inserisci l'ISBN del libro da visualizzare:");
                     String isbnDaVisualizzare = sc.nextLine();
                     biblioteca.visualizzaLibroPerISBN(isbnDaVisualizzare);
                     break;
 
-                case 5: // Visualizza autore per titolo
+                case 5:
                     System.out.println("Inserisci il titolo del libro:");
                     String titoloDaCercare = sc.nextLine();
                     biblioteca.visualizzaAutorePerTitolo(titoloDaCercare);
                     break;
 
-                case 6: // Visualizza libri per prezzo
+                case 6:
                     System.out.println("Inserisci il prezzo minimo:");
                     double minPrezzo = sc.nextDouble();
                     System.out.println("Inserisci il prezzo massimo:");
@@ -61,17 +60,17 @@ public class Main {
                     sc.nextLine(); // Consuma la newline residua
                     break;
 
-                case 7: // Visualizza libri per argomento
+                case 7:
                     System.out.println("Inserisci l'argomento:");
                     String argomentoDaCercare = sc.nextLine();
                     biblioteca.visualizzaLibriPerArgomento(argomentoDaCercare);
                     break;
 
-                case 8: // Visualizza titolo del libro con il prezzo più alto
+                case 8:
                     biblioteca.visualizzaTitoloPrezzoMassimo();
                     break;
 
-                case 9: // Aggiorna informazioni di un libro
+                case 9:
                     System.out.println("Inserisci l'ISBN del libro da aggiornare:");
                     String isbnDaAggiornare = sc.nextLine();
                     System.out.println("Inserisci il nuovo titolo:");
@@ -83,10 +82,10 @@ public class Main {
                     System.out.println("Inserisci il nuovo prezzo:");
                     double nuovoPrezzo = sc.nextDouble();
                     biblioteca.aggiornaLibro(isbnDaAggiornare, nuovoTitolo, nuovoAutore, nuovoArgomento, nuovoPrezzo);
-                    sc.nextLine(); // Consuma la newline residua
+                    sc.nextLine();
                     break;
 
-                case 10: // Esci dal programma
+                case 10:
                     System.out.println("Uscita dal programma.");
                     break;
 
@@ -95,6 +94,5 @@ public class Main {
             }
         } while (scelta != 10);
 
-        sc.close();
     }
 }
