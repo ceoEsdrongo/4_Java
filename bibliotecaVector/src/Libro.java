@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 /*Si vogliono memorizzare le informazioni dei libri della biblioteca dell'Euganeo riportando,
 per ogni libro, il codice ISBN (codice univoco), il titolo, l’autore, l’argomento e il prezzo.
@@ -17,17 +18,10 @@ e. visualizzare l’elenco dei libri di un certo argomento
 f. visualizzare il titolo dei libri che hanno il prezzo più alto
 4. aggiornare le informazioni di un libro dato il suo ISBN
 5. cancellare un libro dato il suo ISBN*/
-
-
-import java.util.Scanner;
 public class Libro {
-    private String ISBN;
-    private String titolo;
-    private String autore;
-    private String argomento;
+    private String ISBN, titolo, autore, argomento;
     private double prezzo;
 
-    // costruttore senza parametri
     public Libro() {
         ISBN = "";
         titolo = "";
@@ -36,30 +30,21 @@ public class Libro {
         prezzo = 0;
     }
 
-    // costruttore con parametri
-    public Libro(String ISBN, String titolo, String autore, String argomento, double prezzo) {
+    public Libro(String ISBN, String titolo, String autore, String argomento, Double prezzo) {
         this.ISBN = ISBN;
         this.titolo = titolo;
         this.autore = autore;
         this.argomento = argomento;
         this.prezzo = prezzo;
     }
+    //getters e setters
 
-    // getters e setters
-    public String getISBN() {
-        return ISBN;
+    public String getArgomento() {
+        return argomento;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
-    }
-
-    public String getTitolo() {
-        return titolo;
-    }
-
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
+    public void setArgomento(String argomento) {
+        this.argomento = argomento;
     }
 
     public String getAutore() {
@@ -70,12 +55,12 @@ public class Libro {
         this.autore = autore;
     }
 
-    public String getArgomento() {
-        return argomento;
+    public String getISBN() {
+        return ISBN;
     }
 
-    public void setArgomento(String argomento) {
-        this.argomento = argomento;
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
     }
 
     public double getPrezzo() {
@@ -86,31 +71,35 @@ public class Libro {
         this.prezzo = prezzo;
     }
 
-    // metodo per inserire un nuovo libro
-    public void inserisci() {
+    public String getTitolo() {
+        return titolo;
+    }
+
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
+    }
+
+    public void inserimento() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Inserisci l'ISBN del libro:");
+        System.out.println("inserisci l'ISBN del libro");
         ISBN = sc.nextLine();
-
-        System.out.println("Inserisci il titolo del libro:");
+        System.out.println("inserisci il titolo ");
         titolo = sc.nextLine();
-
-        System.out.println("Inserisci l'autore del libro:");
+        System.out.println("inserisci l'autore");
         autore = sc.nextLine();
-
-        System.out.println("Inserisci l'argomento del libro:");
+        System.out.println("inserisci l'argomento");
         argomento = sc.nextLine();
-
-        System.out.println("Inserisci il prezzo del libro:");
+        System.out.println("inserisci il prezzo del libro");
         prezzo = sc.nextDouble();
-        sc.nextLine(); // consuma la newline residua
+        sc.nextLine();
     }
 
     @Override
     public String toString() {
-        return "ISBN: " + ISBN + ", Titolo: " + titolo + ", Autore: " + autore + ", Argomento: " + argomento + ", Prezzo: " + prezzo;
+        return "Libro{" + "ISBN='" + ISBN + '\'' + ", titolo='" + titolo + '\'' + ", autore='" + autore + '\'' + ", argomento='" + argomento + '\'' + ", prezzo=" + prezzo + '}';
     }
-    public void visualizza(){
-        System.out.println(toString());
+
+    public void visualizza() {
+        System.out.println(this.toString());
     }
 }
