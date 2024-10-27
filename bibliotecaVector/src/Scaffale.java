@@ -1,121 +1,104 @@
-import java.util.ArrayList;
+import java.util.Vector;
 
+/*Si vogliono memorizzare le informazioni dei libri della biblioteca dell'Euganeo riportando,
+per ogni libro, il codice ISBN (codice univoco), il titolo, l’autore, l’argomento e il prezzo.
+Realizzare la classe Libro con quanto richiesto.
+Creare la classe Biblioteca con il nome della biblioteca e il numero max di libri presenti.
+Sviluppare le funzionalità CRUD (controllare che i codici ISBN siano univoci, aggiungere i
+controlli opportuni e try-catch,…) per risolvere i seguenti punti:
+1. creare una biblioteca con un certo nome e un numero massimo di libri
+2. inserire dei libri nella biblioteca, uno alla volta controllando l’univocità del codice
+ISBN
+3. visualizzare
+a. tutta la biblioteca
+b. visualizzare le informazioni di un libro dato un codice ISBN
+c. visualizzare l'autore del libro di un certo titolo
+d. visualizzare l’elenco dei libri che hanno un prezzo compreso tra un min e max
+e. visualizzare l’elenco dei libri di un certo argomento
+f. visualizzare il titolo dei libri che hanno il prezzo più alto
+4. aggiornare le informazioni di un libro dato il suo ISBN
+5. cancellare un libro dato il suo ISBN*/
 public class Scaffale {
-    private String nomeScaffale;
-    private ArrayList<Libro> libri;
+   private String nome;
+   private Vector<Libro>targa;
 
-    // Costruttore
-    public Scaffale(String nomeScaffale, int maxLibri) {
-        this.nomeScaffale = nomeScaffale;
-        this.libri = new ArrayList<>(maxLibri);
-    }
+   public Scaffale(String nome){
+       this.nome=nome;
+       targa=new Vector<Libro>();
+   }
+   public void inserimento(Libro l){
+       for(Libro book:targa){
+           if(book.getISBN().equals(l.getISBN())){
+               System.out.println("");
+           }
+       }
+       targa.add(l);
+   }
+   public void visualizza(){
+       if(targa.isEmpty()){
+           System.out.println("");
+       }
+       else {
+           for (Libro l : targa) {
+               System.out.println(l);
+           }
+       }
+   }
+   public void visualizzaISBN(String isbn){
+       for(Libro l1:targa){
+           if(l1.getISBN().equals(isbn)){
+               System.out.println(l1);
+           }
+       }
 
+   }
+   public void visualizzaAutore(String titolo){
+       for (Libro l:targa){
+           if(l.getAutore().equalsIgnoreCase(titolo)){
+               System.out.println(l+"titolo");
+           }
+       }
+   }
+   public void visualizzaRange(double min, double max){
+       boolean t=false;
+       for (Libro l:targa){
+           if(l.getPrezzo()>min&&l.getPrezzo()<max){
+               System.out.println(l);
+               t=true;
+           }
+       }
+   }
+   public void argomento(String argomento){
+       boolean t=true;
+       for (Libro l:targa){
+           if(l.getArgomento().equalsIgnoreCase(argomento)){
+               System.out.println(l);
+               t=false;
+           }
+       }
+   }
+   public void prezzoMax(){
+       for (Libro l:targa){
+           if(targa.isEmpty()){
+               System.out.println();
+           }
 
-    public void inserisciLibro(Libro libro) {
-
-        for (Libro l : libri) {
-            if (l.getISBN().equals(libro.getISBN())) {
-                System.out.println("ISBN già presente. Impossibile aggiungere il libro.");
-                return;
-            }
-        }
-        libri.add(libro);
-        System.out.println("Libro aggiunto con successo.");
-    }
-
-    // Visualizza tutti i libri nello scaffale
-    public void visualizzaScaffale() {
-        if (libri.isEmpty()) {
-            System.out.println("Lo scaffale è vuoto.");
-        } else {
-            for (Libro libro : libri) {
-                libro.visualizza();
-            }
-        }
-    }
-
-    public void visualizzaLibroPerISBN(String ISBN) {
-        for (Libro libro : libri) {
-            if (libro.getISBN().equals(ISBN)) {
-                libro.visualizza();
-                return;
-            }
-        }
-        System.out.println("Libro non trovato.");
-    }
-
-    public void visualizzaAutorePerTitolo(String titolo) {
-        for (Libro libro : libri) {
-            if (libro.getTitolo().equalsIgnoreCase(titolo)) {
-                System.out.println("Autore di " + titolo + ": " + libro.getAutore());
-                return;
-            }
-        }
-        System.out.println("Libro non trovato.");
-    }
-
-    public void visualizzaLibriPerPrezzo(double min, double max) {
-        boolean trovato = false;
-        for (Libro libro : libri) {
-            if (libro.getPrezzo() >= min && libro.getPrezzo() <= max) {
-                libro.visualizza();
-                trovato = true;
-            }
-        }
-        if (!trovato) {
-            System.out.println("Nessun libro trovato nel range di prezzo specificato.");
-        }
-    }
-
-    public void visualizzaLibriPerArgomento(String argomento) {
-        boolean trovato = false;
-        for (Libro libro : libri) {
-            if (libro.getArgomento().equalsIgnoreCase(argomento)) {
-                libro.visualizza();
-                trovato = true;
-            }
-        }
-        if (!trovato) {
-            System.out.println("Nessun libro trovato per l'argomento specificato.");
-        }
-    }
-
-    public void visualizzaTitoloPrezzoMassimo() {
-        if (libri.isEmpty()) {
-            System.out.println("Lo scaffale è vuoto.");
-            return;
-        }
-        Libro maxPrezzoLibro = libri.get(0);
-        for (Libro libro : libri) {
-            if (libro.getPrezzo() > maxPrezzoLibro.getPrezzo()) {
-                maxPrezzoLibro = libro;
-            }
-        }
-        System.out.println("Titolo del libro con il prezzo più alto: " + maxPrezzoLibro.getTitolo());
-    }
-
-    public void aggiornaLibro(String ISBN, String nuovoTitolo, String nuovoAutore, String nuovoArgomento, double nuovoPrezzo) {
-        for (Libro libro : libri) {
-            if (libro.getISBN().equals(ISBN)) {
-                libro.setTitolo(nuovoTitolo);
-                libro.setAutore(nuovoAutore);
-                libro.setArgomento(nuovoArgomento);
-                libro.setPrezzo(nuovoPrezzo);
-                System.out.println("Libro aggiornato con successo.");
-                return;
-            }
-        }
-        System.out.println("Libro non trovato per aggiornamento.");
-    }
-
-    public void cancellaLibro(String ISBN) {
-        for (int i = 0; i < libri.size(); i++) {
-            if (libri.get(i).getISBN().equals(ISBN)) {
-                libri.remove(i);
-                System.out.println("Libro cancellato con successo.");
-                return;
-            }
-        }
-        System.out.println("Libro non trovato per la cancellazione.");
-    }
+       }
+       double maxPrezzo=0;
+       String valMassimo="";
+       for(Libro l:targa){
+           if(l.getPrezzo()>maxPrezzo){
+               maxPrezzo=l.getPrezzo();
+               valMassimo=l.getTitolo();
+           }
+       }
+       System.out.println("il valore massimo del libro0"+valMassimo+"costa"+maxPrezzo);
+   }
+   public void cancellaLibro(String isbn){
+       for (int i = 0; i < targa.size(); i++) {
+           if(targa.get(i).getISBN().equals(isbn)){
+               targa.remove(i);
+           }
+       }
+   }
 }
