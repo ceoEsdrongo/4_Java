@@ -101,4 +101,15 @@ public class Scaffale {
            }
        }
    }
+    public void aggiornaLibro(String isbn) {
+        for (Libro l : targa) {
+            if (l.getISBN().equals(isbn)) {
+                System.out.println("Inserisci le nuove informazioni del libro:");
+                l.inserimento();
+                System.out.println("Libro aggiornato con successo!");
+                return;
+            }
+        }
+        System.out.println("Libro con ISBN " + isbn + " non trovato.");
+    }
 }
