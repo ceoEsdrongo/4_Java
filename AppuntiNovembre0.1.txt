@@ -23,4 +23,5 @@ i flussi sono classificati in:
 flusso di input 
 flusso di outpt
 iu flussi sono due flusso binario e flusso di testo (cerca la mdefinizione) /cerca
+PrintWriter cerca la defizione /cerca 
 
