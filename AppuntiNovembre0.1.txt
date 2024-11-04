@@ -1,0 +1,26 @@
+archivio su memoria permanenete
+struttute dinamiche-->memorizzo i dati finchè ho memoria 
+il vettore è statico e ha limiti di memoria
+dinamici per es ArrayList e vector finchè ho memoria ram memorizzo 
+strutture dinamiche salvare dati su hard disk (memoria permanente)
+archivio=file
+backup memorizza i dati su memoria permanente <-(uno reverse)-> restore
+(xxmomyxx pentito)(pure bazaj)
+i file senquenziali ogni elemento ha uno precedente e un successivo-->file non sequenziali sono file ad accesso casuale 
+random access memory(accesso diretto)
+mohamed.guezam@iisviolamarchesini.edu.it-->il vero boss
+file fomato(testo binario) accesso(sequenzale binari)
+caratteristica fondamentali (permanenza) memorizzo l'informazione nel tempo (razionalità) garantire repirimento rapido e senza errori dei dati (sistematicità ) devono essere omogenei
+record è una struttura di dati composta da un insieme finito di elementi eterogenei detti campi, che sono tra loro ligicamente connessi 
+dato!=informazione 
+dati diventano informazioni quando vado a usarlo e dal tipo di contesto che lo uso
+meta dati es html i tag sono meta dati (i tag non si vedeno in front hand)(come piace a targa)
+i file nascondono meta dati in più 
+l'indirizzo logico di un record è la posizione che questo assume all'interno di un archivio 
+E.O.F-> end of file
+flusso o stream  è un flusso sequenzaile di byte che può essere immaginato come un canale tra la sorgente di una certa informazione e la destinazione 
+i flussi sono classificati in:
+flusso di input 
+flusso di outpt
+iu flussi sono due flusso binario e flusso di testo (cerca la mdefinizione) /cerca
+
