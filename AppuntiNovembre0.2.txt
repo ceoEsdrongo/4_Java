@@ -1,0 +1,68 @@
+Archiviazione dei dati e strutture dinamiche
+Archiviazione su memoria permanente:
+
+È il processo di memorizzazione dei dati su supporti come l’hard disk, dove i dati rimangono anche quando il sistema è spento.
+Strutture dinamiche:
+
+Definizione: Le strutture dinamiche memorizzano i dati finché c'è memoria disponibile (es. RAM).
+Vettori (Array): Sono strutture statiche con una capacità di memoria limitata e definita al momento della loro creazione.
+ArrayList e Vector: Sono strutture dinamiche che possono espandersi fino al limite della memoria RAM disponibile.
+Archivi:
+
+Gli archivi possono essere visti come file memorizzati su memoria permanente.
+Backup: Processo di memorizzazione di copie di dati su memoria permanente.
+Restore: Operazione inversa al backup, che ripristina i dati dalla memoria permanente.
+Tipi di File e Accesso ai Dati
+File sequenziali:
+
+Ogni elemento in un file sequenziale ha un elemento precedente e uno successivo, formando una sequenza.
+File ad accesso casuale:
+
+Detti anche file non sequenziali o Random Access Memory (RAM), consentono l'accesso diretto agli elementi senza rispettare un ordine preciso.
+Tipi di file in base al formato e all'accesso:
+
+Formato:
+Testo: Contengono dati leggibili dall’utente.
+Binario: Contengono dati in formato binario, usati direttamente dalla macchina.
+Accesso:
+Sequenziale: L’accesso avviene in ordine, elemento dopo elemento.
+Casuale (o diretto): L’accesso è diretto e non segue un ordine specifico.
+Caratteristiche fondamentali dei file:
+
+Permanenza: Conservazione dell’informazione nel tempo.
+Razionalità: Garantisce il reperimento rapido e senza errori dei dati.
+Sistematicità: I dati devono essere omogenei e organizzati in modo logico.
+Concetti di Record e Meta Dati
+Record:
+
+È una struttura di dati composta da un insieme finito di elementi eterogenei detti campi.
+I campi sono logicamente connessi tra loro e formano una singola entità.
+Dato vs Informazione:
+
+I dati diventano informazioni solo quando vengono usati e interpretati in un determinato contesto.
+Meta Dati:
+
+Sono dati che descrivono altri dati. Ad esempio, in HTML, i tag sono meta dati.
+Tag: Non sono visibili nella parte frontale del sito web, ma contengono informazioni utili (es. strutturazione dei contenuti).
+File e Meta Dati:
+
+I file possono contenere meta dati nascosti che forniscono informazioni aggiuntive sulla struttura e il contenuto del file stesso.
+Indirizzo logico di un record:
+
+È la posizione che il record assume all’interno di un archivio, indipendentemente dall’effettivo indirizzo fisico.
+Altri concetti importanti
+E.O.F. (End of File):
+
+Segnale che indica la fine di un file.
+Flusso o Stream:
+
+È una sequenza di byte che può essere immaginata come un canale tra la sorgente dell’informazione e la sua destinazione.
+Classificazione dei flussi:
+Flusso di input: Porta dati dall’esterno verso l'interno (ad esempio, da file a programma).
+Flusso di output: Porta dati dall'interno verso l'esterno (ad esempio, da programma a file).
+Tipi di flussi:
+Flusso di testo: Tratta i dati come caratteri leggibili.
+Flusso binario: Tratta i dati in formato binario.
+PrintWriter:
+
+Una classe in Java usata per stampare i dati in modo formattato su flussi di output di testo.
