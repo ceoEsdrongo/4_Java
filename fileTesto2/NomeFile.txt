@@ -1,0 +1,4 @@
+Spaghetti;500;0,95
+Pelati;400;1,25
+Pane;700;3,15
+Marmellata;350;2,70
