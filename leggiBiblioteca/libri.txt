@@ -1,0 +1,3 @@
+Titolo:Il Principe;Autore:Niccolò Machiavelli;Categoria:Letteratura Italiana;
+Titolo:Sistemi e Reti2;Autore:Hoepli;Categoria:Sistemi e Reti;
+Titolo:Operazione Barbarossa;Autore:Hoepli;Categoria:Storia;
