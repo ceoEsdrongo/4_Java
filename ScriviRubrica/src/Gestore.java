@@ -1,47 +1,47 @@
+import java.io.*;
 import java.util.Vector;
 
 public class Gestore {
-    private Vector<Contatto> zanfo;
+    private Vector<Contatto> rubrica;
+    private static final String FILE_NAME = "rubrica.txt";
 
     public Gestore() {
-        zanfo = new Vector<>();
+        rubrica = caricaDaFile();
     }
 
-    // Aggiungi contatto e mantieni l'ordine alfabetico
+    // Aggiungi un contatto e salva su file
     public void aggiungiContatto(Contatto c) {
-        int i = 0;
-        while (i < zanfo.size() && zanfo.get(i).getCognome().compareToIgnoreCase(c.getCognome()) < 0) {
-            i++;
-        }
-        zanfo.add(i, c);
+        rubrica.add(c);
+        salvaSuFile();
     }
 
-    // Elimina un contatto dato il cognome e il nome
+    // Elimina un contatto e salva su file
     public boolean eliminaContatto(String cognome, String nome) {
-        for (int i = 0; i < zanfo.size(); i++) {
-            Contatto c = zanfo.get(i);
+        for (Contatto c : rubrica) {
             if (c.getCognome().equalsIgnoreCase(cognome) && c.getNome().equalsIgnoreCase(nome)) {
-                zanfo.remove(i);
+                rubrica.remove(c);
+                salvaSuFile();
                 return true;
             }
         }
         return false;
     }
 
-    // Aggiorna il numero di telefono di un contatto
+    // Aggiorna il numero di un contatto e salva su file
     public boolean aggiornaNumero(String cognome, String nome, double nuovoNumero) {
-        for (Contatto c : zanfo) {
+        for (Contatto c : rubrica) {
             if (c.getCognome().equalsIgnoreCase(cognome) && c.getNome().equalsIgnoreCase(nome)) {
                 c.setNumero(nuovoNumero);
+                salvaSuFile();
                 return true;
             }
         }
         return false;
     }
 
-    // Cerca il numero di telefono di un contatto
+    // Cerca il numero di un contatto
     public Double cercaNumero(String cognome, String nome) {
-        for (Contatto c : zanfo) {
+        for (Contatto c : rubrica) {
             if (c.getCognome().equalsIgnoreCase(cognome) && c.getNome().equalsIgnoreCase(nome)) {
                 return c.getNumero();
             }
@@ -49,19 +49,48 @@ public class Gestore {
         return null;
     }
 
-    // Visualizza i contatti che iniziano con una lettera
-    public void visualizzaPerLettera(char lettera) {
-        for (Contatto c : zanfo) {
-            if (c.getCognome().toUpperCase().charAt(0) == Character.toUpperCase(lettera)) {
-                c.visualizza();
+    // Visualizza i contatti
+    public void visualizzaRubrica() {
+        if (rubrica.isEmpty()) {
+            System.out.println("La rubrica è vuota.");
+        } else {
+            for (Contatto c : rubrica) {
+                System.out.println(c.toString());
             }
         }
     }
 
-    // Visualizza tutti i contatti
-    public void visualizzaRubrica() {
-        for (Contatto c : zanfo) {
-            c.visualizza();
+    // Salva la rubrica su file
+    private void salvaSuFile() {
+        try (FileWriter writer = new FileWriter(FILE_NAME)) {
+            for (Contatto c : rubrica) {
+                writer.write(c.getCognome() + ";" + c.getNome() + ";" + c.getNumero() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Errore durante il salvataggio dei contatti.");
         }
+    }
+
+    // Carica la rubrica da file
+    private Vector<Contatto> caricaDaFile() {
+        Vector<Contatto> rubrica = new Vector<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] dati = linea.split(";");
+                if (dati.length == 3) {
+                    Contatto c = new Contatto();
+                    c.setCognome(dati[0]);
+                    c.setNome(dati[1]);
+                    c.setNumero(Double.parseDouble(dati[2]));
+                    rubrica.add(c);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Il file non esiste, verrà creata una nuova rubrica.");
+        } catch (IOException e) {
+            System.out.println("Errore durante il caricamento dei contatti.");
+        }
+        return rubrica;
     }
 }
