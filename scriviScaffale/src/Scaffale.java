@@ -1,12 +1,17 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Vector;
 
 public class Scaffale {
     private String nome;
     private Vector<Libro> targa;
+    private static final String nomeFile = "biblioteca.txt"; // File per salvare la biblioteca
 
     public Scaffale(String nome) {
         this.nome = nome;
-        targa = new Vector<Libro>();
+        targa = new Vector<>();
+        salvaSuFile(); // Inizializza il file vuoto
     }
 
     // Inserimento di un libro nella lista
@@ -18,18 +23,8 @@ public class Scaffale {
             }
         }
         targa.add(l);
+        salvaSuFile();
     }
-    // Classe Scaffale
-    public void visualizzaAutore(String titolo) {
-        for (Libro l : targa) {
-            if (l.getTitolo().equalsIgnoreCase(titolo)) {
-                System.out.println("L'autore del libro \"" + titolo + "\" è: " + l.getAutore());
-                return;
-            }
-        }
-        System.out.println("Libro con titolo \"" + titolo + "\" non trovato.");
-    }
-
 
     // Visualizza tutti i libri
     public void visualizza() {
@@ -53,7 +48,18 @@ public class Scaffale {
         System.out.println("Libro con ISBN " + isbn + " non trovato.");
     }
 
-    // Visualizza libri con un prezzo nell'intervallo
+    // Visualizza autore dato il titolo
+    public void visualizzaAutore(String titolo) {
+        for (Libro l : targa) {
+            if (l.getTitolo().equalsIgnoreCase(titolo)) {
+                System.out.println("L'autore del libro \"" + titolo + "\" è: " + l.getAutore());
+                return;
+            }
+        }
+        System.out.println("Libro con titolo \"" + titolo + "\" non trovato.");
+    }
+
+    // Visualizza libri con prezzo compreso tra min e max
     public void visualizzaRange(double min, double max) {
         boolean trovato = false;
         for (Libro l : targa) {
@@ -106,6 +112,7 @@ public class Scaffale {
             if (targa.get(i).getISBN().equals(isbn)) {
                 targa.remove(i);
                 System.out.println("Libro con ISBN " + isbn + " cancellato.");
+                salvaSuFile();
                 return;
             }
         }
@@ -118,9 +125,21 @@ public class Scaffale {
             if (l.getISBN().equals(isbn)) {
                 System.out.println("Inserisci le nuove informazioni per il libro con ISBN " + isbn + ":");
                 l.inserimento();
+                salvaSuFile();
                 return;
             }
         }
         System.out.println("Libro con ISBN " + isbn + " non trovato.");
+    }
+
+    // Metodo per salvare la lista dei libri su file
+    private void salvaSuFile() {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(nomeFile))) {
+            for (Libro l : targa) {
+                pw.println(l.getISBN() + ";" + l.getTitolo() + ";" + l.getAutore() + ";" + l.getArgomento() + ";" + l.getPrezzo());
+            }
+        } catch (IOException e) {
+            System.out.println("Errore durante il salvataggio su file: " + e.getMessage());
+        }
     }
 }
