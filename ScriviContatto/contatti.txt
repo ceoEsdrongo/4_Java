@@ -1,3 +1,0 @@
-Nome:Leonardo;Cognome:Raise;Numero:3315000000;
-Nome:Marcello;Cognome:Plate;Numero:0011000001;
-Nome:Mohamed;Cognome:xXMomyXx;Numero:6589412357;
