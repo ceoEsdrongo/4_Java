@@ -2,6 +2,8 @@ public class Libro {
     private String ISBN, titolo, autore, argomento;
     private double prezzo;
 
+    public Libro() {}
+
     public Libro(String ISBN, String titolo, String autore, String argomento, double prezzo) {
         this.ISBN = ISBN;
         this.titolo = titolo;
@@ -12,11 +14,10 @@ public class Libro {
 
     @Override
     public String toString() {
-        return "ISBN: " + ISBN + ", Titolo: " + titolo + ", Autore: " + autore + ", Argomento: " + argomento + ", Prezzo: " + prezzo;
+        return "Libro{ISBN='" + ISBN + "', titolo='" + titolo + "', autore='" + autore + "', argomento='" + argomento + "', prezzo=" + prezzo + "}";
     }
 
-    // Getter
-    public String getISBN() {
-        return ISBN;
+    public void visualizza() {
+        System.out.println(this);
     }
 }
