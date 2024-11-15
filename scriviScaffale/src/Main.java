@@ -7,7 +7,7 @@ public class Main {
         System.out.print("Inserisci il nome della biblioteca: ");
         String nomeBiblioteca = sc.nextLine();
 
-        Scaffale euganeo = new Scaffale(nomeBiblioteca);
+        Scaffale biblioteca = new Scaffale(nomeBiblioteca);
 
         boolean t = true;
 
@@ -33,27 +33,27 @@ public class Main {
                     // Inserisci un nuovo libro
                     Libro nuovoLibro = new Libro();
                     nuovoLibro.inserimento();
-                    euganeo.inserimento(nuovoLibro);
+                    biblioteca.inserimento(nuovoLibro);
                     System.out.println("Libro aggiunto con successo!");
                     break;
 
                 case 2:
                     // Visualizza tutta la biblioteca
-                    euganeo.visualizza();
+                    biblioteca.visualizza();
                     break;
 
                 case 3:
                     // Visualizza informazioni di un libro dato l'ISBN
                     System.out.print("Inserisci l'ISBN del libro: ");
                     String isbn = sc.nextLine();
-                    euganeo.visualizzaISBN(isbn);
+                    biblioteca.visualizzaISBN(isbn);
                     break;
 
                 case 4:
                     // Visualizza autore dato il titolo
                     System.out.print("Inserisci il titolo del libro: ");
                     String titolo = sc.nextLine();
-                    euganeo.visualizzaAutore(titolo);
+                    biblioteca.visualizzaAutore(titolo);
                     break;
 
                 case 5:
@@ -62,34 +62,33 @@ public class Main {
                     double min = sc.nextDouble();
                     System.out.print("Inserisci il prezzo massimo: ");
                     double max = sc.nextDouble();
-                    euganeo.visualizzaRange(min, max);
+                    biblioteca.visualizzaRange(min, max);
                     break;
 
                 case 6:
                     // Visualizza libri di un certo argomento
                     System.out.print("Inserisci l'argomento: ");
                     String argomento = sc.nextLine();
-                    euganeo.argomento(argomento);
+                    biblioteca.argomento(argomento);
                     break;
 
                 case 7:
                     // Visualizza titolo dei libri con prezzo più alto
-                    euganeo.prezzoMax();
+                    biblioteca.prezzoMax();
                     break;
 
                 case 8:
                     // Aggiorna le informazioni di un libro dato l'ISBN
                     System.out.print("Inserisci l'ISBN del libro da aggiornare: ");
                     String isbnAggiornamento = sc.nextLine();
-                    euganeo.aggiornaLibro(isbnAggiornamento);
+                    biblioteca.aggiornaLibro(isbnAggiornamento);
                     break;
-
 
                 case 9:
                     // Cancella un libro dato l'ISBN
                     System.out.print("Inserisci l'ISBN del libro da cancellare: ");
                     String isbnCancellazione = sc.nextLine();
-                    euganeo.cancellaLibro(isbnCancellazione);
+                    biblioteca.cancellaLibro(isbnCancellazione);
                     System.out.println("Libro cancellato con successo!");
                     break;
 
@@ -105,6 +104,6 @@ public class Main {
             }
         }
 
-
+        sc.close(); // Chiude lo scanner per evitare memory leaks
     }
 }
