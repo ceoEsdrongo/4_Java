@@ -1,0 +1,1 @@
+raise,leonardo,5545252.0
