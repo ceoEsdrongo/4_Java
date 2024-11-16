@@ -1,0 +1,12 @@
+class file 
+path nome percorso file 
+percorso assoluto:percorso completo
+percorso relativo: a senda del mio eseguibile è relativo a dove si trova l'eseguibile
+URI indentifica una risolrsa la"I" risorsa generica l'URL ti connette solo a un sito
+intranet:rete locale
+internet: rete mondiale
+ram file f
+Sop file system
+file fisico 
+boolean exists ti dice se già creato o meno
+
