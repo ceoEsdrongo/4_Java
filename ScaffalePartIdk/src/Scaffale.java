@@ -1,15 +1,15 @@
 import java.io.*;
 import java.util.Vector;
 
-public class Scaffale implements Serializable{
+public class Scaffale implements Serializable {
     private String nome;
     private Vector<Libro> targa;
-    private static final String nomeFile = "biblioteca.dat"; // File per salvare la biblioteca
+    private static final String nomeFile = "biblioteca.dat";  // File per salvare la biblioteca
 
     public Scaffale(String nome) {
         this.nome = nome;
-        targa = new Vector<>();
-        salvaSuFile(); // Inizializza il file vuoto
+        this.targa = new Vector<>();
+        caricaDaFile(); // Carica la biblioteca dal file all'avvio
     }
 
     // Inserimento di un libro nella lista
@@ -30,7 +30,7 @@ public class Scaffale implements Serializable{
             System.out.println("Nessun libro presente nella biblioteca.");
         } else {
             for (Libro l : targa) {
-                l.visualizza();
+                System.out.println(l);
             }
         }
     }
@@ -39,7 +39,7 @@ public class Scaffale implements Serializable{
     public void visualizzaISBN(String isbn) {
         for (Libro l : targa) {
             if (l.getISBN().equals(isbn)) {
-                l.visualizza();
+                System.out.println(l);
                 return;
             }
         }
@@ -62,7 +62,7 @@ public class Scaffale implements Serializable{
         boolean trovato = false;
         for (Libro l : targa) {
             if (l.getPrezzo() >= min && l.getPrezzo() <= max) {
-                l.visualizza();
+                System.out.println(l);
                 trovato = true;
             }
         }
@@ -76,7 +76,7 @@ public class Scaffale implements Serializable{
         boolean trovato = false;
         for (Libro l : targa) {
             if (l.getArgomento().equalsIgnoreCase(argomento)) {
-                l.visualizza();
+                System.out.println(l);
                 trovato = true;
             }
         }
@@ -122,7 +122,7 @@ public class Scaffale implements Serializable{
         for (Libro l : targa) {
             if (l.getISBN().equals(isbn)) {
                 System.out.println("Inserisci le nuove informazioni per il libro con ISBN " + isbn + ":");
-                l.inserimento();
+                l.inserimento(); // Assumiamo che il metodo inserimento permetta di aggiornare i dati
                 salvaSuFile();
                 return;
             }
@@ -132,14 +132,26 @@ public class Scaffale implements Serializable{
 
     // Metodo per salvare la lista dei libri su file
     private void salvaSuFile() {
-        try (FileOutputStream pw = new FileOutputStream(new File(nomeFile))) {
-            ObjectOutputStream bo = new ObjectOutputStream(pw);
-            for (Libro l : targa) {
-
-                bo.writeObject(l);
+        try (FileOutputStream fos = new FileOutputStream(nomeFile);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            for (Libro libro : targa) {
+                oos.writeObject(libro);
             }
         } catch (IOException e) {
             System.out.println("Errore durante il salvataggio su file: " + e.getMessage());
+        }
+    }
+
+    // Metodo per caricare i libri dal file
+    private void caricaDaFile() {
+        try (FileInputStream fis = new FileInputStream(nomeFile);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+            while (fis.available() > 0) {
+                Libro libro = (Libro) ois.readObject();
+                targa.add(libro);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Errore durante la lettura dal file: " + e.getMessage());
         }
     }
 }

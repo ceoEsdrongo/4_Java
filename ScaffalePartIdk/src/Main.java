@@ -3,16 +3,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Scaffale biblioteca = new Scaffale("Biblioteca");
 
-        System.out.print("Inserisci il nome della biblioteca: ");
-        String nomeBiblioteca = sc.nextLine();
+        boolean continua = true;
 
-        Scaffale biblioteca = new Scaffale(nomeBiblioteca);
-
-        boolean t = true;
-
-        while (t) {
-            System.out.println("\n--- Menu Biblioteca ---");
+        while (continua) {
+            System.out.println("\n--- Biblioteca ---");
             System.out.println("1. Inserisci un nuovo libro");
             System.out.println("2. Visualizza tutta la biblioteca");
             System.out.println("3. Visualizza un libro tramite ISBN");
@@ -32,78 +28,56 @@ public class Main {
                 case 1:
                     // Inserisci un nuovo libro
                     Libro nuovoLibro = new Libro();
-                    nuovoLibro.inserimento();
+                    nuovoLibro.inserimento(); // Metodo inserimento nella classe Libro
                     biblioteca.inserimento(nuovoLibro);
                     System.out.println("Libro aggiunto con successo!");
                     break;
-
                 case 2:
-                    // Visualizza tutta la biblioteca
                     biblioteca.visualizza();
                     break;
-
                 case 3:
-                    // Visualizza informazioni di un libro dato l'ISBN
                     System.out.print("Inserisci l'ISBN del libro: ");
                     String isbn = sc.nextLine();
                     biblioteca.visualizzaISBN(isbn);
                     break;
-
                 case 4:
-                    // Visualizza autore dato il titolo
                     System.out.print("Inserisci il titolo del libro: ");
                     String titolo = sc.nextLine();
                     biblioteca.visualizzaAutore(titolo);
                     break;
-
                 case 5:
-                    // Visualizza libri con prezzo compreso tra min e max
                     System.out.print("Inserisci il prezzo minimo: ");
                     double min = sc.nextDouble();
                     System.out.print("Inserisci il prezzo massimo: ");
                     double max = sc.nextDouble();
                     biblioteca.visualizzaRange(min, max);
                     break;
-
                 case 6:
-                    // Visualizza libri di un certo argomento
                     System.out.print("Inserisci l'argomento: ");
                     String argomento = sc.nextLine();
                     biblioteca.argomento(argomento);
                     break;
-
                 case 7:
-                    // Visualizza titolo dei libri con prezzo più alto
                     biblioteca.prezzoMax();
                     break;
-
                 case 8:
-                    // Aggiorna le informazioni di un libro dato l'ISBN
                     System.out.print("Inserisci l'ISBN del libro da aggiornare: ");
                     String isbnAggiornamento = sc.nextLine();
                     biblioteca.aggiornaLibro(isbnAggiornamento);
                     break;
-
                 case 9:
-                    // Cancella un libro dato l'ISBN
                     System.out.print("Inserisci l'ISBN del libro da cancellare: ");
-                    String isbnCancellazione = sc.nextLine();
-                    biblioteca.cancellaLibro(isbnCancellazione);
-                    System.out.println("Libro cancellato con successo!");
+                    String isbnDaCancellare = sc.nextLine();
+                    biblioteca.cancellaLibro(isbnDaCancellare);
                     break;
-
                 case 0:
-                    // Esci dal programma
+                    continua = false;
                     System.out.println("Uscita dal programma...");
-                    t = false;
                     break;
-
                 default:
-                    System.out.println("Scelta non valida. Riprova.");
-                    break;
+                    System.out.println("Opzione non valida, riprova.");
             }
         }
-
-        sc.close(); // Chiude lo scanner per evitare memory leaks
+        sc.close();
     }
 }

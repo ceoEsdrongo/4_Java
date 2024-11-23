@@ -1,30 +1,54 @@
+import java.io.Serializable;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.util.Scanner;
 
 public class Libro implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String ISBN, titolo, autore, argomento;
+    private String ISBN;
+    private String titolo;
+    private String autore;
+    private String argomento;
     private double prezzo;
-    private static final String nomeFile = "libri.txt";
-    // File per la scrittura dei libri
-    private PrintWriter pw;
+    private static final String nomeFile = "biblioteca.csv"; // CSV per i libri
 
+    // Costruttore vuoto
     public Libro() {
-        ISBN = "";
-        titolo = "";
-        autore = "";
-        argomento = "";
-        prezzo = 0;
+        this.ISBN = "";
+        this.titolo = "";
+        this.autore = "";
+        this.argomento = "";
+        this.prezzo = 0.0;
     }
 
-    public Libro(String ISBN, String titolo, String autore, String argomento, Double prezzo) {
-        this.ISBN = ISBN;
-        this.titolo = titolo;
-        this.autore = autore;
-        this.argomento = argomento;
-        this.prezzo = prezzo;
+    // Metodo per inserire i dati del libro
+    public void inserimento() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Inserisci ISBN: ");
+        this.ISBN = sc.nextLine();
+
+        System.out.print("Inserisci il titolo: ");
+        this.titolo = sc.nextLine();
+
+        System.out.print("Inserisci l'autore: ");
+        this.autore = sc.nextLine();
+
+        System.out.print("Inserisci l'argomento: ");
+        this.argomento = sc.nextLine();
+
+        System.out.print("Inserisci il prezzo: ");
+        this.prezzo = sc.nextDouble();
+        sc.nextLine(); // Consuma la newline rimasta
+
+        // Scrittura dei dati nel file CSV
+        try (PrintWriter pw = new PrintWriter(new FileWriter(nomeFile, true))) {
+            pw.println(ISBN + ";" + titolo + ";" + autore + ";" + argomento + ";" + prezzo);
+            System.out.println("Libro aggiunto con successo!");
+        } catch (IOException e) {
+            System.out.println("Errore durante la scrittura del file: " + e.getMessage());
+        }
     }
 
     // Getters e Setters
@@ -68,42 +92,19 @@ public class Libro implements Serializable {
         this.prezzo = prezzo;
     }
 
-    // Metodo per inserire un nuovo libro, chiedendo i dati all'utente
-    public void inserimento() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Inserisci ISBN: ");
-        ISBN = sc.nextLine();
-
-        System.out.print("Inserisci il titolo: ");
-        titolo = sc.nextLine();
-
-        System.out.print("Inserisci l'autore: ");
-        autore = sc.nextLine();
-
-        System.out.print("Inserisci l'argomento: ");
-        argomento = sc.nextLine();
-
-        System.out.print("Inserisci il prezzo: ");
-        prezzo = sc.nextDouble();
-
-        // Scrittura del libro nel file
-        try {
-            pw = new PrintWriter(new java.io.FileWriter(nomeFile, true));  // 'true' per appendere al file
-            pw.println(ISBN + ";" + titolo + ";" + autore + ";" + argomento + ";" + prezzo);
-            pw.close();
-            System.out.println("Libro aggiunto con successo!");
-        } catch (IOException e) {
-            System.out.println("Errore durante la scrittura del file: " + e.getMessage());
-        }
-    }
-
+    // Metodo toString per visualizzare il libro in modo leggibile
     @Override
     public String toString() {
-        return "Libro{" + "ISBN='" + ISBN + '\'' + ", titolo='" + titolo + '\'' + ", autore='" + autore + '\'' + ", argomento='" + argomento + '\'' + ", prezzo=" + prezzo + '}';
+        return "Libro{" +
+                "ISBN='" + ISBN + '\'' +
+                ", titolo='" + titolo + '\'' +
+                ", autore='" + autore + '\'' +
+                ", argomento='" + argomento + '\'' +
+                ", prezzo=" + prezzo +
+                '}';
     }
 
-    // Visualizza informazioni del libro
+    // Metodo per visualizzare i dettagli del libro
     public void visualizza() {
         System.out.println(this.toString());
     }
