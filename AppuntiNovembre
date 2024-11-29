@@ -1,0 +1,15 @@
+try{
+  FileOutputStream fos = new FileOutputStream("VectorPersone.dat");
+  ObjectOutputStream fos = new ObjectOutputStream("fos");
+  oos.writeObject(elenco);
+  oos.flush();
+
+oss.close();
+fos.close();
+}catch(){
+//leggo il vector
+}
+try{
+FileInputStream fis = new FileOutputStream("VectorPersone.dat");
+ ObjectInputStream fos = new ObjectInputStream("fos");
+}
