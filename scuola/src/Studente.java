@@ -16,6 +16,7 @@ public class Studente {
     private String cognome;
     private int voto;
     private Vector<Studente> stds = new Vector<>();
+    private String aula="studenti.csv";
 
     // Costruttore con parametri
     public Studente(String nome, String cognome, int voto) {
